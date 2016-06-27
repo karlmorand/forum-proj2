@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/usersModel.js');
+var bcrypt = require('bcrypt');
 
 
 router.get('/', function(req, res){
@@ -17,6 +18,7 @@ router.get('/signup', function(req, res){
 	res.render('signup.html.ejs');
 	});
 router.post('/signup', function(req, res){
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
   User.create(req.body, function(err, user){
     console.log('NEW USER:');
     console.log(user);
