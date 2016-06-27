@@ -37,5 +37,12 @@ router.post('/signup', function(req, res){
   })
 })
 
+router.get('/logout', function(req, res){
+  //removes the user session to logout the user and redirects them to the homepage
+  req.session.destroy(function(err){
+    console.log('Destroyed the user session');
+    res.redirect('/')
+  })
+})
 
 module.exports = router;
