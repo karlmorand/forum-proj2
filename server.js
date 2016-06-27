@@ -3,17 +3,12 @@ var app = express();
 var userController = require('./controllers/userController.js');
 var postController = require('./controllers/postController.js');
 var mongoose = require('mongoose');
-
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({extended:false}));
 
 app.use('/users', userController);
 app.use('/posts', postController);
 
-app.get('/login', function(req, res){//eventually will need to update this to redirect to posts index if user is already logged in (tested by checking session data)
-  res.render('login.html.ejs');
-})
-app.get('/signup', function(req, res){
-	res.render('signup.html.ejs');
-	});
 
 app.get('/', function(req, res){
   res.render('home.html.ejs')

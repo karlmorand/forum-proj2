@@ -1,8 +1,28 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/usersModel.js');
+
 
 router.get('/', function(req, res){
   res.send('Users index page');
+})
+
+router.get('/login', function(req, res){//eventually will need to update this to redirect to posts index if user is already logged in (tested by checking session data)
+  res.render('login.html.ejs');
+})
+router.post('/login', function(req,res){
+  //search mongodb for the user and password
+})
+router.get('/signup', function(req, res){
+	res.render('signup.html.ejs');
+	});
+router.post('/signup', function(req, res){
+  User.create(req.body, function(err, user){
+    console.log('NEW USER:');
+    console.log(user);
+    res.send('new user created');
+  })
+
 })
 
 
