@@ -29,4 +29,10 @@ router.post('/create', function(req, res){
   })
 })
 
+router.get('/:id', function(req, res){
+  Post.findById(req.params.id, function(err, foundPost){
+    res.render('postdetail.html.ejs', {post: foundPost})
+  })
+})
+
 module.exports = router;
