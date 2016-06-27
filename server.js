@@ -20,7 +20,7 @@ app.use('/posts', postController);
 
 app.get('/', function(req, res){
   if (req.session.loggedInUsername !== undefined) {
-    res.render('posts.html.ejs');
+    res.redirect('/posts');
   } else {
     res.render('home.html.ejs')
   }

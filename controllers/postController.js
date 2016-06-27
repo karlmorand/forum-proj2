@@ -5,7 +5,10 @@ var User = require('../models/usersModel.js');
 
 
 router.get('/', function(req, res){
-  res.send('Posts index page');
+  Post.find({}, function(err, foundPosts){
+      res.render('posts.html.ejs', {posts: foundPosts});
+  })
+
 })
 
 router.get('/create', function(req, res){
@@ -19,6 +22,7 @@ router.post('/create', function(req, res){
           foundUser.posts.push(newPost);
           foundUser.save(function(err){
             console.log(newPost);
+            res.redirect('/posts')
         })
       })
     })

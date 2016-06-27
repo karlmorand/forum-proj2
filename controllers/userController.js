@@ -31,9 +31,8 @@ router.get('/signup', function(req, res){
 router.post('/signup', function(req, res){
   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
   User.create(req.body, function(err, user){
-    console.log('NEW USER:');
-    console.log(user);
-    res.send('new user created');
+    req.session.loggedInUsername = req.body.username
+    res.redirect('/posts')
   })
 })
 
