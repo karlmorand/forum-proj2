@@ -44,4 +44,9 @@ router.get('/logout', function(req, res){
   })
 })
 
+router.get('/:id', function(req, res){
+  User.findById(req.params.id, function(err, foundUser){
+    res.render('author.html.ejs', {user: foundUser});
+  })
+})
 module.exports = router;
