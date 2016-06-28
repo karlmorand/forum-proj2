@@ -51,7 +51,8 @@ router.get('/:id/newcomment', function(req, res){
 })
 
 router.post('/:id/newcomment', function(req, res){
-  Comment.create({body: req.body.body, postID: req.params.id, author: req.session.loggedInUsername}, function(err, newcomment){
+  var commentDate = new Date();
+  Comment.create({body: req.body.body, postID: req.params.id, author: req.session.loggedInUsername, date: commentDate}, function(err, newcomment){
     Post.findById(req.params.id, function(err, foundPost){
       foundPost.comments.push(newcomment);
       res.redirect('/posts/' + req.params.id);
