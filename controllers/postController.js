@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Post = require('../models/postsModel.js');
 var User = require('../models/usersModel.js');
+var Comment = require('../models/commentsModel.js');
 
 
 router.get('/', function(req, res){
@@ -31,8 +32,26 @@ router.post('/create', function(req, res){
 
 router.get('/:id', function(req, res){
   Post.findById(req.params.id, function(err, foundPost){
-    res.render('postdetail.html.ejs', {post: foundPost})
+    Comment.find({postID: req.params.id}, function(err, comments){
+      res.render('postdetail.html.ejs', {post: foundPost, comments: comments})
+    })
+
   })
 })
 
+router.get('/:id/newcomment', function(req, res){
+  Post.findById(req.params.id, function(err, foundPost){
+    res.render('newcomment.html.ejs', {post: foundPost})
+  })
+})
+
+router.post('/:id/newcomment', function(req, res){
+  Comment.create({body: req.body.body, postID: req.params.id, author: req.session.loggedInUsername}, function(err, newcomment){
+    Post.findById(req.params.id, function(err, foundPost){
+      foundPost.comments.push(newcomment);
+      res.redirect('/posts/' + req.params.id);
+    })
+
+  })
+})
 module.exports = router;

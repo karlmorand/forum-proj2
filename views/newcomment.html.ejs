@@ -10,12 +10,11 @@
     <p>
       <%=post.body%>
     </p>
-    <%comments.forEach(function(comment){%>
-      <p>
-        <%=comment.body%>
-      </p>
-    <%})%>
-    <a href="/posts/<%=post._id%>/newcomment">Add a comment</a>
+    <form action="/posts/<%=post._id%>/newcomment" method="post">
+      <textarea name="body" rows="8" cols="40" placeholder="Enter your comment here"></textarea>
+      <input type="submit">
+
+    </form>
 
   </body>
 </html>

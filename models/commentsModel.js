@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 var userSchema = require('./usersModel').schema;
 
-
 var commentSchema = mongoose.Schema({
-  post: String,
+  postID: String,
   body: String,
-  author: [userSchema]
+  author: String
 });
 
 var Comment = mongoose.model('Comment', commentSchema);

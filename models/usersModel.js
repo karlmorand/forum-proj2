@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
   username: String,
   password: String,
-  posts: []
+  posts: [],
+  comments: []
 });
 
 var User = mongoose.model('User', userSchema);
