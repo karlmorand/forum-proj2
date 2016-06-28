@@ -17,6 +17,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use('/users', userController);
 app.use('/posts', postController);
+app.set('view engine', 'ejs');
 
 
 app.get('/', function(req, res){

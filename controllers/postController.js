@@ -18,7 +18,9 @@ router.get('/create', function(req, res){
 router.post('/create', function(req, res){
   User.findOne({username: req.session.loggedInUsername}, function(err, foundUser){
     Post.create(req.body, function(err, newPost){
-      newPost.author.push(foundUser)
+      var postDate = new Date();
+      newPost.date = postDate;
+      newPost.author.push(foundUser);
       newPost.save(function(err){
           foundUser.posts.push(newPost);
           foundUser.save(function(err){

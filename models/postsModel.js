@@ -5,6 +5,7 @@ var commentSchema = require('./commentsModel').schema;
 var postSchema = mongoose.Schema({
   title: String,
   body: String,
+  date: Date,
   author: [userSchema],
   comments: [commentSchema]
 });
