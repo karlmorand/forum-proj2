@@ -13,6 +13,7 @@ app.use(session({
 }));
 
 
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use('/users', userController);
 app.use('/posts', postController);
