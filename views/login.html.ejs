@@ -11,8 +11,16 @@
       <input type="text" name="username" value="" placeholder="Username">
       <input type="password" name="password" placeholder="password">
       <input type="submit" value="Submit">
-
     </form>
+    <%if(failure === 'username'){%>
+      <p>
+        INCORRECT USERNAME!
+      </p>
+    <%} else if (failure === 'password'){%>
+      <p>
+        ICORRECT PASSWORD!
+      </p>
+    <%}%>
 
   </body>
 </html>

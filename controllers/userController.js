@@ -9,18 +9,24 @@ router.get('/', function(req, res){
 })
 
 router.get('/login', function(req, res){
-  res.render('login.html.ejs');
+  req.session.failure = "";
+  res.render('login.html.ejs', {failure: req.session.failure});
 })
+
 router.post('/login', function(req,res){
-  //search mongodb for the user and password
   User.findOne({username: req.body.username}, function(err, foundUser){
-    console.log(foundUser);
-    if(bcrypt.compareSync(req.body.password, foundUser.password)){
-      req.session.loggedInUsername = foundUser.username;
-      res.redirect('/');
+    if (foundUser === null) {
+      req.session.failure = 'username';
+      res.render('login.html.ejs', {failure: req.session.failure});
     } else {
-      res.alert('incorrectet username or password');
+      if(bcrypt.compareSync(req.body.password, foundUser.password)){
+        req.session.loggedInUsername = foundUser.username;
+        res.redirect('/');
+      } else {
+        req.session.failure = 'password';
+      res.send('incorrect password', {failure: req.session.failure})
     }
+  }
   })
 })
 
@@ -44,7 +50,7 @@ router.get('/logout', function(req, res){
   })
 })
 
-router.get('/:id', function(req, res){
+router.get('/showuser/:id', function(req, res){
   User.findById(req.params.id, function(err, foundUser){
     res.render('author.html.ejs', {user: foundUser});
   })
