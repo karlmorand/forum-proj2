@@ -24,7 +24,7 @@ router.post('/login', function(req,res){
         res.redirect('/');
       } else {
         req.session.failure = 'password';
-      res.send('incorrect password', {failure: req.session.failure})
+        res.render('login.html.ejs', {failure: req.session.failure});
     }
   }
   })
