@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta chrarset="utf-8">
-    <link rel="stylesheet" href="main.css" media="screen" charset="utf-8">
-    <title></title>
-  </head>
+<%- include('./partials/head.html.ejs')%>
   <body>
     <h1><%=user.username%></h1>
     <%user.posts.forEach(function(post){%>
