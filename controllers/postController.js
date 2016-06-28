@@ -41,7 +41,10 @@ router.get('/:id', function(req, res){
 
 router.get('/:id/newcomment', function(req, res){
   Post.findById(req.params.id, function(err, foundPost){
-    res.render('newcomment.html.ejs', {post: foundPost})
+    Comment.find({postID: req.params.id}, function(err, comments){
+      res.render('newcomment.html.ejs', {post: foundPost, comments: comments})
+    })
+
   })
 })
 
