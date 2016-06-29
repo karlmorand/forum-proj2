@@ -41,14 +41,14 @@ router.get('/:id', function(req, res){
   })
 })
 
-router.get('/:id/newcomment', function(req, res){
-  Post.findById(req.params.id, function(err, foundPost){
-    Comment.find({postID: req.params.id}, function(err, comments){
-      res.render('newcomment.html.ejs', {post: foundPost, comments: comments})
-    })
-
-  })
-})
+// router.get('/:id/newcomment', function(req, res){
+//   Post.findById(req.params.id, function(err, foundPost){
+//     Comment.find({postID: req.params.id}, function(err, comments){
+//       res.render('newcomment.html.ejs', {post: foundPost, comments: comments})
+//     })
+//
+//   })
+// })
 
 router.post('/:id/newcomment', function(req, res){
   var commentDate = new Date();

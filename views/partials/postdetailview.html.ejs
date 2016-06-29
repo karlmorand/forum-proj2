@@ -13,5 +13,8 @@
   <%})%>
 
   <a href="/">Back to posts index</a>
+  <form action="/posts/<%=post._id%>/newcomment" method="post">
+    <textarea name="body" rows="8" cols="40" placeholder="Enter your comment here"></textarea>
+    <input type="submit">
 
-  <a href="/posts/<%=post._id%>/newcomment">Add a comment</a>
+  </form>
