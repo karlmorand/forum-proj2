@@ -21,6 +21,7 @@ router.post('/create', function(req, res){
     Post.create(req.body, function(err, newPost){
       var postDate = new Date();
       newPost.date = postDate;
+      newPost.likes = 0;
       newPost.author.push(foundUser);
       newPost.save(function(err){
           foundUser.posts.push(newPost);
@@ -50,7 +51,14 @@ router.get('/:id', function(req, res){
 //
 //   })
 // })
-
+router.get('/:id/like', function(req, res){
+  Post.findById(req.params.id, function(err, foundPost){
+    foundPost.likes += 1;
+    foundPost.save(function(err){
+      res.redirect('/posts/'+req.params.id)
+    });
+  })
+})
 router.post('/:id/newcomment', function(req, res){
   var commentDate = new Date();
   Comment.create({body: req.body.body, postID: req.params.id, author: req.session.loggedInUsername, date: commentDate}, function(err, newcomment){

@@ -6,10 +6,17 @@
   <p>
     <%=post.body%>
   </p>
+  <p>
+    <a href="/posts/<%=post._id%>/like">Add a like</a>
+  </p>
+  <p>
+    Likes: <%=post.likes%>
+  </p>
   <%comments.forEach(function(comment){%>
   <p>
     <%=comment.body%> - <%=comment.author%> - <%=comment.date%>
   </p>
+
   <%})%>
 
   <a href="/">Back to posts index</a>
