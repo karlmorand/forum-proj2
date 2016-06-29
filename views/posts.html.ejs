@@ -10,7 +10,7 @@
       <div class="post-item">
         <h1 class="post-title"><a href="/posts/<%=post._id%>"><%=post.title%></a></h1>
         <p>
-          By: <a href="/users/<%=post.author[0]._id%>"><%=post.author[0].username%></a> on <%=post.date%>
+          By: <a class="username" href="/users/<%=post.author[0]._id%>"><%=post.author[0].username%></a> on <%=post.date%>
         </p>
       </div>
     <%})%>

@@ -25,3 +25,7 @@ h1 {
   font-style: italic;
   font-family: Courier, monospace;
 }
+.username {
+  font-weight: bold;
+  font-family: Helvetica, sans-serif;
+}
