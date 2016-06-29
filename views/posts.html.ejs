@@ -7,16 +7,12 @@
     <a href="/posts/create">Create new post</a>
 
     <%posts.forEach(function(post){%>
-      <h1><a href="/posts/<%=post._id%>"><%=post.title%></a></h1>
-      <p>
-        <%=post.body%>
-      </p>
-      <p>
-        Author: <a href="/users/<%=post.author[0]._id%>"><%=post.author[0].username%></a>
-      </p>
-      <p>
-        Date: <%=post.date%>
-      </p>
+      <div class="post-item">
+        <h1 class="post-title"><a href="/posts/<%=post._id%>"><%=post.title%></a></h1>
+        <p>
+          By: <a href="/users/<%=post.author[0]._id%>"><%=post.author[0].username%></a> on <%=post.date%>
+        </p>
+      </div>
     <%})%>
   </body>
 </html>
