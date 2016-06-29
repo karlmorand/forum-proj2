@@ -24,7 +24,7 @@ app.get('/', function(req, res){
   if (req.session.loggedInUsername !== undefined) {
     res.redirect('/posts');
   } else {
-    res.render('home.html.ejs')
+    res.render('login.html.ejs', {failure: ""})
   }
 });
 
