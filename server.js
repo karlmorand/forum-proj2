@@ -5,7 +5,9 @@ var postController = require('./controllers/postController.js');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
 var session = require('express-session');
+var port = process.env.PORT || 3000;
 
+var mongoDBURI = process.env.MONGODB_URI || 'mongodb://heroku_q82969fx:g2ok88jhluq1af7o1etjfu583r@ds023674.mlab.com:23674/heroku_q82969fx'
 app.use(session({
   secret: "purplecorsica",
   resave: false,
@@ -17,10 +19,6 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use('/users', userController);
 app.use('/posts', postController);
-app.set('view engine', 'ejs');
-
-
-app.locals.currentUser = session.loggedInUsername;
 
 app.get('/', function(req, res){
   if (req.session.loggedInUsername !== undefined) {
@@ -30,11 +28,11 @@ app.get('/', function(req, res){
   }
 });
 
-mongoose.connect('mongodb://localhost:27017/forum');
+mongoose.connect(mongoDBURI);
 mongoose.connection.once('open', function(){
   console.log('Connected to mongod');
 })
 
-app.listen(3000, function(){
-  console.log('Server up, listening on port 3000');
+app.listen(port, function(){
+  console.log('Server up, listening');
 })
