@@ -20,6 +20,8 @@ app.use('/posts', postController);
 app.set('view engine', 'ejs');
 
 
+app.locals.currentUser = session.loggedInUsername;
+
 app.get('/', function(req, res){
   if (req.session.loggedInUsername !== undefined) {
     res.redirect('/posts');
