@@ -3,6 +3,8 @@ var router = express.Router();
 var User = require('../models/usersModel.js');
 var bcrypt = require('bcrypt');
 
+router.use(express.static('public'));
+
 
 router.get('/', function(req, res){
   res.send('Users index page');
@@ -50,7 +52,7 @@ router.get('/logout', function(req, res){
   })
 })
 
-router.get('/showuser/:id', function(req, res){
+router.get('/:id', function(req, res){
   User.findById(req.params.id, function(err, foundUser){
     res.render('author.html.ejs', {user: foundUser});
   })

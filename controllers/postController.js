@@ -3,6 +3,7 @@ var router = express.Router();
 var Post = require('../models/postsModel.js');
 var User = require('../models/usersModel.js');
 var Comment = require('../models/commentsModel.js');
+router.use(express.static('public'));
 
 
 router.get('/', function(req, res){
