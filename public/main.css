@@ -29,3 +29,7 @@ h1 {
   font-weight: bold;
   font-family: Helvetica, sans-serif;
 }
+.sidebar {
+  background-color: orange;
+  box-sizing: border-box;
+}
