@@ -35,14 +35,38 @@ router.post('/create', function(req, res){
 })
 
 router.get('/:id', function(req, res){
+  var canEdit = false;
   Post.findById(req.params.id, function(err, foundPost){
     Comment.find({postID: req.params.id}, function(err, comments){
-      res.render('postdetail.html.ejs', {post: foundPost, comments: comments})
+      if (foundPost.author[0].username === req.session.loggedInUsername) {
+        canEdit = true;
+      } else {canEdit = false};
+      res.render('postdetail.html.ejs', {post: foundPost, comments: comments, canEdit: canEdit})
     })
 
   })
 })
 
+router.get('/:id/edit', function(req, res){
+  var canEdit = false;
+  Post.findById(req.params.id, function(err, foundPost){
+    Comment.find({postID: req.params.id}, function(err, comments){
+      if (foundPost.author[0].username === req.session.loggedInUsername) {
+        canEdit = true;
+      } else {canEdit = false};
+      res.render('postedit.html.ejs', {post: foundPost, comments: comments, canEdit: canEdit})
+    })
+  })
+})
+
+router.post('/:id/edit', function(req, res){
+  Post.findById(req.params.id, function(err, foundPost){
+    foundPost.body = req.body.body;
+      foundPost.save(
+        res.redirect('/posts/'+req.params.id)
+      )
+    })
+})
 // router.get('/:id/newcomment', function(req, res){
 //   Post.findById(req.params.id, function(err, foundPost){
 //     Comment.find({postID: req.params.id}, function(err, comments){
