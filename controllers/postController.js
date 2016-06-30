@@ -61,10 +61,15 @@ router.get('/:id/like', function(req, res){
 })
 router.post('/:id/newcomment', function(req, res){
   var commentDate = new Date();
-  Comment.create({body: req.body.body, postID: req.params.id, author: req.session.loggedInUsername, date: commentDate}, function(err, newcomment){
-    Post.findById(req.params.id, function(err, foundPost){
-      foundPost.comments.push(newcomment);
-      res.redirect('/posts/' + req.params.id);
+  Comment.create({body: req.body.body, postID: req.params.id, date: commentDate}, function(err, newcomment){
+    User.findOne({username: req.session.loggedInUsername}, function(err, foundUser){
+      newcomment.author = foundUser;
+      Post.findById(req.params.id, function(err, foundPost){
+        foundPost.comments.push(newcomment);
+        newcomment.save(function(){
+        res.redirect('/posts/' + req.params.id);
+        })
+      })
     })
 
   })

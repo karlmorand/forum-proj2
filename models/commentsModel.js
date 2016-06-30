@@ -4,7 +4,7 @@ var userSchema = require('./usersModel').schema;
 var commentSchema = mongoose.Schema({
   postID: String,
   body: String,
-  author: String,
+  author: [],
   date: Date
 });
 
