@@ -32,4 +32,6 @@ h1 {
 .sidebar {
   background-color: orange;
   box-sizing: border-box;
+  padding-right: 2%;
+  border-right: 1rem solid white;
 }

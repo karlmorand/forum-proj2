@@ -3,15 +3,9 @@
   <%- include partials/head.html.ejs %>
   <body>
     <div class="pure-g">
-      <div class="pure-u-1 pure-u-md-1-8 pure-u-lg-1-8 sidebar">
-        <ul>
-          <li>Login</li>
-          <li>Logout</li>
-          <li>New post</li>
-        </ul>
-      </div>
+      <%- include partials/sidebar.html.ejs %>
 
-    <div class="pure-u-1 pure-u-md-7-8 pure-u-lg-7-8">
+    <div class="pure-u-1 pure-u-md-4-5 pure-u-lg-4-5">
       <h1><%=user.username%></h1>
       <%user.posts.forEach(function(post){%>
         <h2><a href="/posts/<%=post._id%>"><%=post.title%></a></h2>
