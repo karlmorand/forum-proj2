@@ -33,15 +33,20 @@ router.post('/login', function(req,res){
 })
 
 router.get('/signup', function(req, res){
-	res.render('signup.html.ejs');
+	res.render('signup.html.ejs', {failure: ""});
 	});
 
 router.post('/signup', function(req, res){
   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+  if (User.findOne({username: req.body.username})) {
+    req.session.failure = 'username taken';
+    res.render('signup.html.ejs', {failure: 'username taken'})
+  } else {
   User.create(req.body, function(err, user){
     req.session.loggedInUsername = req.body.username
     res.redirect('/posts')
   })
+}
 })
 
 router.get('/logout', function(req, res){
