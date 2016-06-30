@@ -7,7 +7,7 @@ var bodyParser = require('body-parser')
 var session = require('express-session');
 var port = process.env.PORT || 3000;
 
-var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/forum-proj'
+var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/forum-project'
 app.use(session({
   secret: "purplecorsica",
   resave: false,

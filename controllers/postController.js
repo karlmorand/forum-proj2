@@ -8,7 +8,7 @@ router.use(express.static('public'));
 
 router.get('/', function(req, res){
   Post.find({}, function(err, foundPosts){
-      res.render('posts.html.ejs', {posts: foundPosts});
+    res.render('posts.html.ejs', {posts: foundPosts});
   })
 
 })
