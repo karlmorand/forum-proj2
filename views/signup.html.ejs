@@ -2,6 +2,10 @@
 <html>
   <%- include partials/head.html.ejs %>
   <body>
+    <div class="pure-g">
+  <%- include partials/sidebar.html.ejs %>
+
+  <div class="pure-u-1 pure-u-md-4-5 pure-u-lg-4-5">
     <h1>Enter a username and password</h1>
     <form action="" method="post">
       <input type="text" name="username" placeholder="Username">
@@ -13,5 +17,7 @@
         USERNAME ALREADY TAKEN
       </p>
       <%}%>
+    </div>
+  </div>
   </body>
 </html>

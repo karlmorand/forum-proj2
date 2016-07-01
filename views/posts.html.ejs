@@ -2,21 +2,23 @@
 <html>
   <%- include partials/head.html.ejs %>
   <body>
-    Posts index
-    <a href="/users/logout">Logout</a>
-    <a href="/posts/create">Create new post</a>
-    <a href="/posts?sort=likes">Sort by likes</a>
+    <div class="pure-g">
+  <%- include partials/sidebar.html.ejs %>
 
-    <%posts.forEach(function(post){%>
-      <div class="post-item">
-        <h1 class="post-title"><a href="/posts/<%=post._id%>"><%=post.title%></a></h1>
-        <p>
-          By: <a class="username" href="/users/<%=post.author[0]._id%>"><%=post.author[0].username%></a> on <%=post.date%>
-        </p>
-        <p>
-          Likes: <%=post.likes%>
-        </p>
-      </div>
-    <%})%>
+<div class="pure-u-1 pure-u-md-4-5 pure-u-lg-4-5">
+
+      <%posts.forEach(function(post){%>
+        <div class="post-item">
+          <h1 class="post-title"><a href="/posts/<%=post._id%>"><%=post.title%></a></h1>
+          <p>
+            By: <a class="username" href="/users/<%=post.author[0]._id%>"><%=post.author[0].username%></a> on <%=post.date%>
+          </p>
+          <p>
+            Likes: <%=post.likes%>
+          </p>
+        </div>
+      <%})%>
+    </div>
+  </div>
   </body>
 </html>
