@@ -21,8 +21,15 @@ router.get('/', function(req, res){
 })
 
 router.get('/create', function(req, res){
-  res.render('newpost.html.ejs');
+  if (req.session.loggedInUsername !== undefined) {
+    User.findOne({username: req.session.loggedInUsername}, function(err, foundUser){
+  res.render('newpost.html.ejs', {activeUser: foundUser});
+  })
+} else {
+  res.redirect('/posts');
+}
 })
+
 router.post('/create', function(req, res){
   User.findOne({username: req.session.loggedInUsername}, function(err, foundUser){
     Post.create(req.body, function(err, newPost){
@@ -43,16 +50,26 @@ router.post('/create', function(req, res){
 
 router.get('/:id', function(req, res){
   var canEdit = false;
-  Post.findById(req.params.id, function(err, foundPost){
-    Comment.find({postID: req.params.id}, function(err, comments){
+  if (req.session.loggedInUsername !== undefined) {
+    User.findOne({username: req.session.loggedInUsername}, function(err, foundUser){
+      Post.findById(req.params.id, function(err, foundPost){
+        Comment.find({postID: req.params.id}, function(err, comments){
       if (foundPost.author[0].username === req.session.loggedInUsername) {
         canEdit = true;
       } else {canEdit = false};
-      res.render('postdetail.html.ejs', {post: foundPost, comments: comments, canEdit: canEdit})
+        res.render('postdetail.html.ejs', {post: foundPost, comments: comments, canEdit: canEdit, activeUser: foundUser})
+        })
+      })
     })
-
+  } else {
+    Post.findById(req.params.id, function(err, foundPost){
+      Comment.find({postID: req.params.id}, function(err, comments){
+    res.render('postdetail.html.ejs', {post: foundPost, comments: comments, canEdit: false, activeUser:''})
   })
 })
+}
+})
+
 
 router.get('/:id/edit', function(req, res){
   var canEdit = false;
@@ -61,7 +78,12 @@ router.get('/:id/edit', function(req, res){
       if (foundPost.author[0].username === req.session.loggedInUsername) {
         canEdit = true;
       } else {canEdit = false};
-      res.render('postedit.html.ejs', {post: foundPost, comments: comments, canEdit: canEdit})
+      if (req.session.loggedInUsername !== undefined) {
+      User.findOne({username: req.session.loggedInUsername}, function(err, foundUser){
+        res.render('postedit.html.ejs', {post: foundPost, comments: comments, canEdit: canEdit, activeUser: foundUser})
+      })
+    } else {res.render('postedit.html.ejs', {post: foundPost, comments: comments, canEdit: canEdit, activeUser: ''})
+            }
     })
   })
 })

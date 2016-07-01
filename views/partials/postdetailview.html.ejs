@@ -23,9 +23,10 @@
   </p>
 
   <%})%>
-
+<%if(activeUser !==''){%>
   <a href="/">Back to posts index</a>
   <form action="/posts/<%=post._id%>/newcomment" method="post">
     <textarea name="body" rows="8" cols="40" placeholder="Enter your comment here"></textarea>
     <input type="submit">
   </form>
+  <%}%>
