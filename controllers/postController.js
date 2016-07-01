@@ -8,6 +8,7 @@ router.use(express.static('public'));
 
 
 router.get('/', function(req, res){
+if (req.query.sort === 'likes') {
   Post.find().sort({likes: -1}).exec(function(err, foundPosts){
     if (req.session.loggedInUsername !== undefined) {
       User.findOne({username: req.session.loggedInUsername}, function(err, foundUser){
@@ -17,6 +18,18 @@ router.get('/', function(req, res){
     res.render('posts.html.ejs', {posts: foundPosts, activeUser: ''});
     }
   })
+} else {
+  Post.find().sort({date: -1}).exec(function(err, foundPosts){
+    if (req.session.loggedInUsername !== undefined) {
+      User.findOne({username: req.session.loggedInUsername}, function(err, foundUser){
+      res.render('posts.html.ejs', {posts: foundPosts, activeUser: foundUser});
+      })
+    } else {
+    res.render('posts.html.ejs', {posts: foundPosts, activeUser: ''});
+    }
+  })
+
+}
 
 })
 
