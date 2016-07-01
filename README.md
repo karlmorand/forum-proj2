@@ -8,7 +8,7 @@ This forum allows users to signup, post articles, and 'like' articles they enjoy
 - HTML/CSS
 - node.js  
 - Express  
-- Pure CSS  
+- Pure CSS (see lines 4-6 in views/partials/head.html.ejs)  
 - EJS templates  
 - bcrypt encryption  
 
