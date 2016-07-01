@@ -12,7 +12,7 @@ router.get('/', function(req, res){
 
 router.get('/login', function(req, res){
   req.session.failure = "";
-  res.render('login.html.ejs', {failure: req.session.failure});
+  res.render('login.html.ejs', {failure: req.session.failure, activeUser: ''});
 })
 
 router.post('/login', function(req,res){

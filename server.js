@@ -21,12 +21,8 @@ app.use('/users', userController);
 app.use('/posts', postController);
 
 app.get('/', function(req, res){
-  if (req.session.loggedInUsername !== undefined) {
-    res.redirect('/posts');
-  } else {
-    res.render('login.html.ejs', {failure: ""})
-  }
-});
+      res.redirect('/posts');
+    });
 
 mongoose.connect(mongoDBURI);
 mongoose.connection.once('open', function(){
