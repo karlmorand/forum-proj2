@@ -6,12 +6,12 @@
   <%- include partials/sidebar.html.ejs %>
 
 <div class="pure-u-1 pure-u-md-4-5 pure-u-lg-4-5">
-
+  <h1>XYZ Forum</h1>
       <%posts.forEach(function(post){%>
         <div class="post-item">
-          <h1 class="post-title"><a href="/posts/<%=post._id%>"><%=post.title%></a></h1>
+          <h2 class="post-title"><a href="/posts/<%=post._id%>"><%=post.title%></a></h2>
           <p>
-            By: <a class="username" href="/users/<%=post.author[0]._id%>"><%=post.author[0].username%></a> on <%=post.date%>
+            By: <a class="username" href="/users/<%=post.author[0]._id%>"><%=post.author[0].username%></a> on <span class="date"><%=post.date%></span>
           </p>
           <p>
             Likes: <%=post.likes%>

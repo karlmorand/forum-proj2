@@ -5,10 +5,12 @@
     <div class="pure-g">
       <%- include partials/sidebar.html.ejs %>
     <div class="pure-u-1 pure-u-md-4-5 pure-u-lg-4-5">
+      <h1>Create a new post</h1>
         <form action="/posts/create" method="post">
-          <input type="text" name="title" placeholder="Title">
+          <!-- <input type="text" name="title" placeholder="Title" class="inputspace"> -->
+          <textarea name="title" rows="1" cols="60" class="inputspace" placeholder="Title"></textarea>
           <br>
-          <textarea name="body" rows="8" cols="40"></textarea>
+          <textarea name="body" rows="15" cols="60" class="inputspace" placeholder="Post"></textarea>
           <br>
           <input type="submit">
         </form>
