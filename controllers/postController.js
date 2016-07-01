@@ -8,7 +8,7 @@ router.use(express.static('public'));
 
 
 router.get('/', function(req, res){
-  Post.find({}, function(err, foundPosts){
+  Post.find().sort({likes: -1}).exec(function(err, foundPosts){
     if (req.session.loggedInUsername !== undefined) {
       User.findOne({username: req.session.loggedInUsername}, function(err, foundUser){
       res.render('posts.html.ejs', {posts: foundPosts, activeUser: foundUser});
